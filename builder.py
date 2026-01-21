@@ -4,7 +4,7 @@ from datetime import datetime
 import locale
 
 # URL da sua planilha publicada (Substitua pela sua URL real do Google Sheets)
-CSV_URL = "SUA_URL_DO_GOOGLE_SHEETS_AQUI"
+CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSQe2uTE5GpiMPKIzFzv3kzuLAj-covtjG7bur7XcJ4wWEUStq2qXQvek-lEeDB04FLqbWwzcRGI86Z/pub?gid=0&single=true&output=csv"
 
 # Dicionário para tradução de meses (evita problemas de locale no servidor)
 MESES = {
