@@ -1,0 +1,13 @@
+project:
+  type: website
+  output-dir: docs # GitHub Pages gosta desta pasta
+
+website:
+  title: "MFC Pelotas"
+  navbar: false # Remove a barra de navegação superior para ficar "clean"
+  
+format:
+  html:
+    theme: cosmo
+    mainfont: "Segoe UI, Roboto, Helvetica, Arial, sans-serif"
+    backgroundcolor: "#f8f9fa" # Fundo levemente cinza
