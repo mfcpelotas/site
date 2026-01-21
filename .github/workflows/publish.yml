@@ -1,0 +1,41 @@
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 9 * * *' # Roda todo dia às 06:00 da manhã (Brasília é UTC-3, então 09:00 UTC)
+
+name: Atualizar Agenda e Publicar
+
+jobs:
+  build-deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+          
+      - name: Set up Quarto
+        uses: quarto-dev/quarto-actions/setup@v2
+
+      - name: Gerar Agenda (Python)
+        run: python builder.py
+
+      - name: Renderizar Site (Quarto)
+        uses: quarto-dev/quarto-actions/render@v2
+        with:
+          to: html
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./docs
