@@ -1,6 +1,8 @@
 project:
   type: website
   output-dir: docs # GitHub Pages gosta desta pasta
+  resources:    # <--- Adicione esta linha
+    - images/   # <--- E esta linha (com o traço e espaço)
 
 website:
   title: "MFC Pelotas"
