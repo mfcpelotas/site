@@ -10,7 +10,7 @@ format:
 ---
 
 ::: {.text-center}
-![](images/logo.png){width=150px}
+![](logo.png){width=150px}
 
 # Movimento Familiar Cristão
 ### Pelotas - RS
