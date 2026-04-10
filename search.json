@@ -1,12 +1,5 @@
 [
   {
-    "objectID": "agenda_component.html",
-    "href": "agenda_component.html",
-    "title": "MFC Pelotas",
-    "section": "",
-    "text": "NoteSem eventos programados\n\n\n\nNo momento não temos eventos futuros na agenda."
-  },
-  {
     "objectID": "index.html",
     "href": "index.html",
     "title": "MFC Pelotas",
@@ -19,5 +12,12 @@
     "title": "MFC Pelotas",
     "section": "📅 Próximos Eventos",
     "text": "📅 Próximos Eventos\n\n\n\n\n\n\nNotaSem eventos programados\n\n\n\nNo momento não temos eventos futuros na agenda.\n\n\n\n\nAtualizado diariamente.\nMFC Pelotas © 2026"
+  },
+  {
+    "objectID": "agenda_component.html",
+    "href": "agenda_component.html",
+    "title": "MFC Pelotas",
+    "section": "",
+    "text": "NoteSem eventos programados\n\n\n\nNo momento não temos eventos futuros na agenda."
   }
 ]
