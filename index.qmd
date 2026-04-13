@@ -19,8 +19,6 @@ format:
 :::
 
 ::: {.d-grid .gap-2 .col-md-6 .mx-auto .my-4}
-[📝 Quero ser Membro](LINK_DO_FORMULARIO){.btn .btn-primary .btn-lg role="button"}
-[💬 Fale Conosco (WhatsApp)](LINK_DO_WHATSAPP){.btn .btn-success .btn-lg role="button"}
 [📸 Nosso Instagram](https://instagram.com/mfcpelotas){.btn .btn-outline-danger .btn-lg role="button"}
 :::
 
