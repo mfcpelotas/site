@@ -1,6 +1,6 @@
-# Arquivo: builder.py
+# Arquivo: builder.py atualizado
 import pandas as pd
-from datetime import datetime
+from datetime import datetime, timedelta
 import locale
 
 # URL da sua planilha publicada (Substitua pela sua URL real do Google Sheets)
@@ -15,28 +15,31 @@ MESES = {
 
 def gerar_agenda():
     try:
-        # Lê o CSV (espera colunas: data, evento, local, equipe)
         df = pd.read_csv(CSV_URL)
-        
-        # Converte a coluna data para datetime (esperando formato DD/MM/AAAA)
         df['data_obj'] = pd.to_datetime(df['data'], format='%d/%m/%Y', dayfirst=True)
         
-        # Filtra apenas datas futuras ou hoje
         hoje = datetime.now()
-        df_futuro = df[df['data_obj'] >= hoje].sort_values('data_obj')
+        
+        # --- NOVIDADE: Definindo o limite de 45 dias ---
+        limite_futuro = hoje + timedelta(days=45)
+        
+        # Filtra eventos entre hoje e o limite de 45 dias
+        df_futuro = df[
+            (df['data_obj'] >= hoje) & 
+            (df['data_obj'] <= limite_futuro)
+        ].sort_values('data_obj')
+        # -----------------------------------------------
 
         markdown_output = ""
 
         if df_futuro.empty:
-            markdown_output += "::: {.callout-note}\n## Sem eventos programados\nNo momento não temos eventos futuros na agenda.\n:::\n"
+            markdown_output += "::: {.callout-note}\n## Agenda\nNão há eventos programados para os próximos 45 dias.\n:::\n"
         else:
-            # Itera sobre os eventos
+            # Mantemos a mesma lógica de construção visual dos cards
             for _, row in df_futuro.iterrows():
                 dia = row['data_obj'].day
                 mes_extenso = MESES[row['data_obj'].month]
-                ano = row['data_obj'].year
                 
-                # Cria um "Card" visual para cada evento
                 markdown_output += f"""
 ::: {{.card .mb-3}}
 ::: {{.card-body}}
@@ -46,16 +49,14 @@ def gerar_agenda():
 :::
 """
         
-        # Salva em um arquivo que o Quarto vai incluir
         with open("agenda_component.md", "w", encoding="utf-8") as f:
             f.write(markdown_output)
-            print("Agenda atualizada com sucesso!")
+            print(f"Agenda filtrada (próximos 45 dias) gerada com sucesso!")
 
     except Exception as e:
         print(f"Erro ao gerar agenda: {e}")
-        # Cria um arquivo de erro para não quebrar o site
         with open("agenda_component.md", "w", encoding="utf-8") as f:
-            f.write(f"::: {{.callout-warning}}\n## Erro na sincronização\nNão foi possível atualizar a agenda.\n:::")
+            f.write("::: {.callout-warning}\n## Erro na sincronização\nNão foi possível atualizar a agenda.\n:::")
 
 if __name__ == "__main__":
     gerar_agenda()
